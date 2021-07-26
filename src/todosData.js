@@ -1,28 +1,23 @@
 const todosData = [
   {
     id: 1,
-    text: 'Take out the trash',
+    text: 'Lemenni a boltba',
     completed: true,
   },
   {
     id: 2,
-    text: 'Grocery shopping',
+    text: 'TODO app designolása',
     completed: false,
   },
   {
     id: 3,
-    text: 'Clean gecko tank',
+    text: 'Szoba kitakarítása',
     completed: false,
   },
   {
     id: 4,
-    text: 'Mow lawn',
+    text: 'Végignézni a sorozatot',
     completed: true,
-  },
-  {
-    id: 5,
-    text: 'Catch up on Arrested Development',
-    completed: false,
   },
 ]
 

@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import Popup from './Popup';
 
-function PopupNewTodo(props) {
-    const [taskName, setTaskName] = useState('');
-
+function PopupEditTodo(props) {
+    const [taskName, setTaskName] = useState(props.passedTodo.text);
     return (
         <Popup>
-            <h1>Új feladat felvétele</h1>
+            <h1>Feladat szerkesztése</h1>
             <input
                 type='text'
                 placeholder='Új tétel'
                 value={taskName}
                 onChange={(event) => setTaskName(event.target.value)}
             />
-            <button onClick={() => props.addNewTodo(taskName)}>Felvétel</button>
+            <button onClick={() => props.editTask(taskName)}>Szerkesztés</button>
             <button onClick={props.onClose}>Bezárás</button>
         </Popup>
     );
 }
 
-export default PopupNewTodo;
+export default PopupEditTodo;

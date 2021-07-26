@@ -4,10 +4,17 @@ import React, { useState } from 'react';
 import TodoItem from './TodoItem';
 import Popup from './Popup';
 import PopupNewTodo from './PopupNewTodo';
+import PopupEditTodo from './PopupEditTodo';
 
 function App() {
     const [todos, setTodos] = useState(todosData);
     const [showPopup, setPopup] = useState(false);
+    // const [showEditPopup, setEditPopup] = useState(false); // null, '1', '2,
+    const [editingCurrent, setCurrentEditing] = useState({});
+
+    const isEmptyObject = (obj) => Object.keys(obj).length === 0;
+
+    // const [showPopup, setPopup] = useState(); // NULL, 'ADD', 'EDIT'
 
     const handleChange = (id) => {
         setTodos((prevTodos) => {
@@ -21,29 +28,45 @@ function App() {
         });
     };
 
-    const editTask = (id) => {
-        console.log('Editing ', id);
+    const editTask = (editedTaskName) => {
+        const editedTodos = todos.map((todo) => {
+            if (todo.id === editingCurrent.id) {
+                todo.text = editedTaskName;
+            }
+            return todo;
+        });
+        setTodos(editedTodos);
+        closeEditPopup();
     };
 
     const togglePopup = () => {
         setPopup(!showPopup);
     };
 
-    const addNewTodo = (e) => {
-        if (e.target) {
-            setPopup(!showPopup);
-            const newItem = {
-                id: todos.length + 1,
-                text: e.target.value,
-                completed: false
-            };
-            todos.push(newItem);
-            console.log(e.target.value);
-        }
+    const closeNewPopup = () => setPopup(false);
+
+    const closeEditPopup = () => setCurrentEditing({});
+
+    const addNewTodo = (newTodoName) => {
+        closeNewPopup();
+        const newItem = {
+            id: todos.length + 1,
+            text: newTodoName,
+            completed: false
+        };
+        todos.push(newItem);
     };
 
     const todosArr = todos.map((todo) => {
-        return <TodoItem key={todo.id} task={todo} handleChange={handleChange} editTask={editTask} />;
+        return (
+            <TodoItem
+                key={todo.id}
+                task={todo}
+                handleChange={handleChange}
+                editTask={editTask}
+                editFunction={() => setCurrentEditing(todo)}
+            />
+        );
     });
 
     // You don't know JS (https://github.com/getify/You-Dont-Know-JS)
@@ -52,7 +75,10 @@ function App() {
         <div className='todos-container'>
             <div className='todos-header'>
                 {/* {showPopup ? <Popup togglePopup={togglePopup} /> : null} */}
-                {showPopup && <PopupNewTodo addNewTodo={addNewTodo} onClose={() => setPopup(false)} />}
+                {showPopup && <PopupNewTodo addNewTodo={addNewTodo} onClose={closeNewPopup} />}
+                {!isEmptyObject(editingCurrent) && (
+                    <PopupEditTodo onClose={closeEditPopup} editTask={editTask} passedTodo={editingCurrent} />
+                )}
                 <button onClick={togglePopup}>Új hozzáadása</button>
             </div>
             <div className='todos-list'>{todosArr}</div>

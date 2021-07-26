@@ -87,7 +87,7 @@ input[type='checkbox'] {
           justify-content: center;
 }
 
-.popup_inner {
+.popup-inner {
   text-align: center;
   background-color: white;
   width: 50%;
@@ -106,7 +106,7 @@ input[type='checkbox'] {
   padding: 20px;
 }
 
-.popup_inner button {
+.popup-inner button {
   margin-top: 3%;
   color: white;
   font-size: 20px;
@@ -118,7 +118,7 @@ input[type='checkbox'] {
   margin-left: 10px;
 }
 
-.popup_inner input[type='text'] {
+.popup-inner input[type='text'] {
   text-align: center;
   width: 60%;
   font-size: 25px;

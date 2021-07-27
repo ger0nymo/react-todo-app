@@ -1,20 +1,35 @@
 import todosData from '../todosData';
 import TodoFunctions from './TodoFunctions';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoItem from './TodoItem';
 import Popup from './Popup';
 import PopupNewTodo from './PopupNewTodo';
 import PopupEditTodo from './PopupEditTodo';
+import { setStorage, getStorage } from '../utils/StorageFunctions';
 
+const _INIT_TODOS = JSON.parse(getStorage('todos'));
+const getMaxId = () => {
+    if (!_INIT_TODOS || _INIT_TODOS.length === 0) return 0;
+    //Visszatér a legnagyobb idval
+    const ids = _INIT_TODOS.map((todo) => todo.id);
+    ids.sort((a, b) => b - a);
+    return ids[0];
+};
 function App() {
-    const [todos, setTodos] = useState(todosData);
+    const [todos, setTodos] = useState(_INIT_TODOS || []);
     const [showPopup, setPopup] = useState(false);
     // const [showEditPopup, setEditPopup] = useState(false); // null, '1', '2,
     const [editingCurrent, setCurrentEditing] = useState({});
+    const [nextId, setNextId] = useState(getMaxId() + 1);
 
     const isEmptyObject = (obj) => Object.keys(obj).length === 0;
 
     // const [showPopup, setPopup] = useState(); // NULL, 'ADD', 'EDIT'
+
+    useEffect(() => {
+        console.log(todos);
+        setStorage('todos', JSON.stringify(todos));
+    }, [todos]);
 
     const handleChange = (id) => {
         setTodos((prevTodos) => {
@@ -37,19 +52,13 @@ function App() {
         });
         setTodos(editedTodos);
         closeEditPopup();
+        setStorage('todos', editedTodos);
     };
 
     const removeTask = (taskId) => {
         console.log('Removing ', taskId);
         const newTodos = todos.filter((todo) => todo.id !== taskId);
-        setTodos(
-            newTodos.map((newTodo) => {
-                if (newTodo.id >= taskId) {
-                    newTodo.id--;
-                }
-                return newTodo;
-            })
-        );
+        setTodos(newTodos);
     };
 
     const togglePopup = () => {
@@ -63,11 +72,13 @@ function App() {
     const addNewTodo = (newTodoName) => {
         closeNewPopup();
         const newItem = {
-            id: todos.length + 1,
+            id: nextId,
             text: newTodoName,
             completed: false
         };
-        todos.push(newItem);
+        setNextId(newItem.id + 1);
+        const newTodosArr = [...todos, newItem];
+        setTodos(newTodosArr);
     };
 
     const todosArr = todos.map((todo) => {

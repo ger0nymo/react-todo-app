@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&family=Roboto:wght@300;400&display=swap');
 
+body {
+  background-color: lightblue;
+}
+
 #root {
   font-family: Roboto;
   display: flex;
@@ -7,6 +11,9 @@
 }
 
 .todos-list {
+  border: 3px solid black;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
   background: white;
   display: flex;
   flex-direction: column;
@@ -17,32 +24,36 @@
   margin-bottom: 20px;
 }
 button {
-  color: white;
-  background-color: rgb(100, 85, 85);
+  border-radius: 8px;
+  color: black;
+  background-color: rgb(255, 255, 255);
   font-size: large;
 }
 .todos-container {
   margin-top: 100px;
-  width: 30%;
+  width: 500px;
 }
 
 .todo {
-  background-color: rgb(100, 85, 85);
-  border-bottom: 2px solid white;
-  border-radius: 5px;
+  //background-color: rgb(100, 85, 85);
   display: flex;
   align-items: center;
   p {
     padding-left: 10px;
     font-size: 18px;
-    color: white;
+    color: black;
     text-align: left;
   }
   button {
+    border: none;
+    zoom: 1.7;
+  }
+  .todo-buttons {
     margin-left: auto;
-    margin-right: 10px;
+    justify-self: right;
   }
 }
+
 input[type='checkbox'] {
   zoom: 1.8;
 }

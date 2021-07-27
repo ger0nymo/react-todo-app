@@ -6,7 +6,14 @@ function TodoItem(props) {
         <div className='todo'>
             <input type='checkbox' checked={props.task.completed} onChange={() => props.handleChange(props.task.id)} />
             <p>{props.task.text}</p>
-            <button onClick={props.editFunction}>Szerk.</button>
+            <div className='todo-buttons'>
+                <button onClick={props.editFunction}>
+                    <i className='fa fa-edit'></i>
+                </button>
+                <button onClick={props.removeTask}>
+                    <i className='fa fa-remove'></i>
+                </button>
+            </div>
         </div>
     );
 }

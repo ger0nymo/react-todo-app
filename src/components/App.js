@@ -39,6 +39,19 @@ function App() {
         closeEditPopup();
     };
 
+    const removeTask = (taskId) => {
+        console.log('Removing ', taskId);
+        const newTodos = todos.filter((todo) => todo.id !== taskId);
+        setTodos(
+            newTodos.map((newTodo) => {
+                if (newTodo.id >= taskId) {
+                    newTodo.id--;
+                }
+                return newTodo;
+            })
+        );
+    };
+
     const togglePopup = () => {
         setPopup(!showPopup);
     };
@@ -64,6 +77,7 @@ function App() {
                 task={todo}
                 handleChange={handleChange}
                 editTask={editTask}
+                removeTask={() => removeTask(todo.id)}
                 editFunction={() => setCurrentEditing(todo)}
             />
         );

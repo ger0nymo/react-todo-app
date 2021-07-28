@@ -13,8 +13,12 @@ function PopupNewTodo(props) {
                 value={taskName}
                 onChange={(event) => setTaskName(event.target.value)}
             />
-            <button onClick={() => props.addNewTodo(taskName)}>Felvétel</button>
-            <button onClick={props.onClose}>Bezárás</button>
+            <button className='add-item-button' onClick={() => props.addNewTodo(taskName)}>
+                Felvétel
+            </button>
+            <button className='close-button' onClick={props.onClose}>
+                Bezárás
+            </button>
         </Popup>
     );
 }

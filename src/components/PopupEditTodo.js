@@ -12,8 +12,12 @@ function PopupEditTodo(props) {
                 value={taskName}
                 onChange={(event) => setTaskName(event.target.value)}
             />
-            <button onClick={() => props.editTask(taskName)}>Szerkesztés</button>
-            <button onClick={props.onClose}>Bezárás</button>
+            <button className='add-item-button' onClick={() => props.editTask(taskName)}>
+                Szerkesztés
+            </button>
+            <button className='close-button' onClick={props.onClose}>
+                Bezárás
+            </button>
         </Popup>
     );
 }

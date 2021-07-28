@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&family=Roboto:wght@300;400&display=swap');
 
 body {
-  background-color: lightblue;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(69, 176, 169, 1) 0%, rgba(105, 113, 255, 1) 100%);
 }
 
 #root {
@@ -9,31 +10,56 @@ body {
   display: flex;
   justify-content: center;
 }
-
 .todos-list {
-  border: 3px solid black;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   background: white;
   display: flex;
   flex-direction: column;
 }
+.btn-add {
+  background-color: white;
+  color: black;
+  height: 50px;
+  width: 50px;
+  border: none;
+  margin-left: auto;
+}
 .todos-header {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  align-items: center;
+  h2 {
+    font-style: italic;
+    color: white;
+    text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+    justify-self: flex-start;
+  }
+}
+.todo-checkbox {
+  background-color: red;
 }
 button {
-  border-radius: 8px;
   color: black;
-  background-color: rgb(255, 255, 255);
-  font-size: large;
+  background-color: white;
+  font-size: 18px;
+  text-align: center;
+}
+.fa-remove {
+  color: rgb(175, 6, 6);
+}
+.fa-edit {
+  color: rgb(22, 22, 22);
 }
 .todos-container {
   margin-top: 100px;
-  width: 500px;
+  width: 400px;
+  zoom: 1.2;
 }
-
+.todo-done {
+  text-decoration: line-through;
+  font-style: italic;
+  color: rgb(70, 70, 70) !important;
+}
 .todo {
   //background-color: rgb(100, 85, 85);
   display: flex;
@@ -73,25 +99,51 @@ input[type='checkbox'] {
 }
 .popup-inner {
   text-align: center;
-  background-color: rgba(255, 255, 255, 1);
-  width: 50%;
+  background: rgb(2, 0, 36);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 0.9) 0%, rgba(188, 190, 218, 0.9) 100%);
+  border-radius: 15px;
+  width: 40%;
   height: 30%;
   margin-top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  button {
-    margin-top: 3%;
+  h1 {
+    font-size: 30px;
+    margin-top: 5px;
+    padding-bottom: 20px;
     color: white;
-    font-size: 20px;
-    padding: 15px;
-    background: rgba(59, 59, 59, 0.8);
-    border-radius: 8%;
-    border: none;
-    width: 20%;
-    margin-left: 10px;
+    text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+    justify-self: flex-start;
   }
+
+  input[type='text'] {
+    border-radius: 5px;
+    height: 20px;
+    border: 1px solid black;
+    padding: 10px 0;
+    font-size: 22px !important;
+  }
+
+  .add-item-button,
+  .close-button {
+    color: white;
+    margin-top: 30px;
+    border: none;
+    background: #3498db;
+    width: 120px;
+    height: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-bottom: 4px solid #407ca3;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  .close-button {
+    margin-top: 15px;
+  }
+
   input[type='text'] {
     text-align: center;
     width: 60%;

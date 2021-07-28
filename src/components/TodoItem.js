@@ -4,8 +4,13 @@ import '../style.css';
 function TodoItem(props) {
     return (
         <div className='todo'>
-            <input type='checkbox' checked={props.task.completed} onChange={() => props.handleChange(props.task.id)} />
-            <p>{props.task.text}</p>
+            <input
+                type='checkbox'
+                className='todo-checkbox'
+                checked={props.task.completed}
+                onChange={() => props.handleChange(props.task.id)}
+            />
+            <p className={props.task.completed && 'todo-done'}>{props.task.text}</p>
             <div className='todo-buttons'>
                 <button onClick={props.editFunction}>
                     <i className='fa fa-edit'></i>

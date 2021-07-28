@@ -104,7 +104,10 @@ function App() {
                 {!isEmptyObject(editingCurrent) && (
                     <PopupEditTodo onClose={closeEditPopup} editTask={editTask} passedTodo={editingCurrent} />
                 )}
-                <button onClick={togglePopup}>Új hozzáadása</button>
+                <h2>TODO App</h2>
+                <button className='btn-add' onClick={togglePopup}>
+                    <i className='fa fa-plus'></i>
+                </button>
             </div>
             <div className='todos-list'>{todosArr}</div>
         </div>

@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen&family=Roboto:wght@300;400&display=swap");
 body {
-  background-color: lightblue;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #45b0a9), to(#6971ff));
+  background: linear-gradient(90deg, #020024 0%, #45b0a9 0%, #6971ff 100%);
 }
 
 #root {
@@ -14,9 +16,8 @@ body {
 }
 
 .todos-list {
-  border: 3px solid black;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+          box-shadow: rgba(0, 0, 0, 0.4) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   background: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -27,26 +28,61 @@ body {
           flex-direction: column;
 }
 
+.btn-add {
+  background-color: white;
+  color: black;
+  height: 50px;
+  width: 50px;
+  border: none;
+  margin-left: auto;
+}
+
 .todos-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.todos-header h2 {
+  font-style: italic;
+  color: white;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  justify-self: flex-start;
+}
+
+.todo-checkbox {
+  background-color: red;
 }
 
 button {
-  border-radius: 8px;
   color: black;
   background-color: white;
-  font-size: large;
+  font-size: 18px;
+  text-align: center;
+}
+
+.fa-remove {
+  color: #af0606;
+}
+
+.fa-edit {
+  color: #161616;
 }
 
 .todos-container {
   margin-top: 100px;
-  width: 500px;
+  width: 400px;
+  zoom: 1.2;
+}
+
+.todo-done {
+  text-decoration: line-through;
+  font-style: italic;
+  color: #464646 !important;
 }
 
 .todo {
@@ -100,8 +136,12 @@ input[type='checkbox'] {
 
 .popup-inner {
   text-align: center;
-  background-color: white;
-  width: 50%;
+  background: #020024;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, rgba(255, 255, 255, 0.9)), to(rgba(188, 190, 218, 0.9)));
+  background: linear-gradient(90deg, #020024 0%, rgba(255, 255, 255, 0.9) 0%, rgba(188, 190, 218, 0.9) 100%);
+  border-radius: 15px;
+  width: 40%;
   height: 30%;
   margin-top: 10%;
   display: -webkit-box;
@@ -117,16 +157,40 @@ input[type='checkbox'] {
   padding: 20px;
 }
 
-.popup-inner button {
-  margin-top: 3%;
+.popup-inner h1 {
+  font-size: 30px;
+  margin-top: 5px;
+  padding-bottom: 20px;
   color: white;
-  font-size: 20px;
-  padding: 15px;
-  background: rgba(59, 59, 59, 0.8);
-  border-radius: 8%;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  justify-self: flex-start;
+}
+
+.popup-inner input[type='text'] {
+  border-radius: 5px;
+  height: 20px;
+  border: 1px solid black;
+  padding: 10px 0;
+  font-size: 22px !important;
+}
+
+.popup-inner .add-item-button,
+.popup-inner .close-button {
+  color: white;
+  margin-top: 30px;
   border: none;
-  width: 20%;
-  margin-left: 10px;
+  background: #3498db;
+  width: 120px;
+  height: 30px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-bottom: 4px solid #407ca3;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.popup-inner .close-button {
+  margin-top: 15px;
 }
 
 .popup-inner input[type='text'] {

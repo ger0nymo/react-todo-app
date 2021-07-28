@@ -43,10 +43,11 @@ function App() {
         });
     };
 
-    const editTask = (editedTaskName) => {
+    const editTask = (editedTaskName, editedPrio) => {
         const editedTodos = todos.map((todo) => {
             if (todo.id === editingCurrent.id) {
                 todo.text = editedTaskName;
+                todo.priority = editedPrio;
             }
             return todo;
         });
@@ -69,11 +70,12 @@ function App() {
 
     const closeEditPopup = () => setCurrentEditing({});
 
-    const addNewTodo = (newTodoName) => {
+    const addNewTodo = (newTodoName, newTodoPrio) => {
         closeNewPopup();
         const newItem = {
             id: nextId,
             text: newTodoName,
+            priority: newTodoPrio,
             completed: false
         };
         setNextId(newItem.id + 1);
@@ -84,6 +86,7 @@ function App() {
     const todosArr = todos.map((todo) => {
         return (
             <TodoItem
+                className={'asdasdasdasdasd'}
                 key={todo.id}
                 task={todo}
                 handleChange={handleChange}
@@ -109,6 +112,14 @@ function App() {
                     <i className='fa fa-plus'></i>
                 </button>
             </div>
+            {/* <div className='order-header'>
+                <button>
+                    <i className='fa fa-square'></i>
+                </button>
+                <button>
+                    SZÖVEG <i className='fa fa-arrow-down'></i>
+                </button>
+            </div> */}
             <div className='todos-list'>{todosArr}</div>
         </div>
     );

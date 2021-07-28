@@ -3,6 +3,7 @@ import Popup from './Popup';
 
 function PopupNewTodo(props) {
     const [taskName, setTaskName] = useState('');
+    const [priority, setPriority] = useState(1);
 
     return (
         <Popup>
@@ -13,12 +14,25 @@ function PopupNewTodo(props) {
                 value={taskName}
                 onChange={(event) => setTaskName(event.target.value)}
             />
-            <button className='add-item-button' onClick={() => props.addNewTodo(taskName)}>
-                Felvétel
-            </button>
-            <button className='close-button' onClick={props.onClose}>
-                Bezárás
-            </button>
+            <div className='popup-bottom'>
+                <button className='add-item-button' onClick={() => props.addNewTodo(taskName, priority)}>
+                    Felvétel
+                </button>
+                <button className='close-button' onClick={props.onClose}>
+                    Bezárás
+                </button>
+            </div>
+            <select value={priority} onChange={(event) => setPriority(event.target.value)}>
+                <option value={1} className='prio-1'>
+                    Nem fontos
+                </option>
+                <option value={2} className='prio-2'>
+                    Közepesen fontos
+                </option>
+                <option value={3} className='prio-3'>
+                    Fontos
+                </option>
+            </select>
         </Popup>
     );
 }

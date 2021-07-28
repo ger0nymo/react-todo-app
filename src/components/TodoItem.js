@@ -3,7 +3,7 @@ import '../style.css';
 
 function TodoItem(props) {
     return (
-        <div className='todo'>
+        <div className={'todo prio-' + props.task.priority}>
             <input
                 type='checkbox'
                 className='todo-checkbox'

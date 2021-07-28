@@ -150,3 +150,27 @@ input[type='checkbox'] {
     font-size: 25px;
   }
 }
+
+//Media queries
+
+@media screen and (max-width: 600px) {
+  .popup-inner {
+    width: 80%;
+    height: 300px;
+    input[type='text'] {
+      width: 80%;
+      font-size: 20px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .popup-inner {
+    width: 80%;
+    height: 250px;
+    input[type='text'] {
+      width: 80%;
+      font-size: 20px !important;
+    }
+  }
+}

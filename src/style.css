@@ -198,4 +198,26 @@ input[type='checkbox'] {
   width: 60%;
   font-size: 25px;
 }
+
+@media screen and (max-width: 600px) {
+  .popup-inner {
+    width: 80%;
+    height: 300px;
+  }
+  .popup-inner input[type='text'] {
+    width: 80%;
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .popup-inner {
+    width: 80%;
+    height: 250px;
+  }
+  .popup-inner input[type='text'] {
+    width: 80%;
+    font-size: 20px !important;
+  }
+}
 /*# sourceMappingURL=style.css.map */

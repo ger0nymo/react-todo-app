@@ -18,18 +18,20 @@ const getMaxId = () => {
 function App() {
     const [todos, setTodos] = useState(_INIT_TODOS || []);
     const [showPopup, setPopup] = useState(false);
-    // const [showEditPopup, setEditPopup] = useState(false); // null, '1', '2,
     const [editingCurrent, setCurrentEditing] = useState({});
     const [nextId, setNextId] = useState(getMaxId() + 1);
+    const [sortBy, setSortBy] = useState(parseInt(getStorage('sortBy')));
 
     const isEmptyObject = (obj) => Object.keys(obj).length === 0;
-
-    // const [showPopup, setPopup] = useState(); // NULL, 'ADD', 'EDIT'
 
     useEffect(() => {
         console.log(todos);
         setStorage('todos', JSON.stringify(todos));
     }, [todos]);
+
+    useEffect(() => {
+        setStorage('sortBy', sortBy);
+    });
 
     const handleChange = (id) => {
         setTodos((prevTodos) => {
@@ -47,7 +49,7 @@ function App() {
         const editedTodos = todos.map((todo) => {
             if (todo.id === editingCurrent.id) {
                 todo.text = editedTaskName;
-                todo.priority = editedPrio;
+                todo.priority = parseInt(editedPrio);
             }
             return todo;
         });
@@ -75,7 +77,7 @@ function App() {
         const newItem = {
             id: nextId,
             text: newTodoName,
-            priority: newTodoPrio,
+            priority: parseInt(newTodoPrio),
             completed: false
         };
         setNextId(newItem.id + 1);
@@ -83,10 +85,45 @@ function App() {
         setTodos(newTodosArr);
     };
 
+    if (sortBy === 0) {
+        todos.sort((a, b) => a.id - b.id);
+    } else if (sortBy === 1) {
+        todos.sort((a, b) => {
+            const nameA = a.text.toUpperCase(); // ignore upper and lowercase
+            const nameB = b.text.toUpperCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        });
+    } else if (sortBy === 2) {
+        todos.sort((a, b) => {
+            const nameA = a.text.toUpperCase(); // ignore upper and lowercase
+            const nameB = b.text.toUpperCase();
+            if (nameA < nameB) {
+                return 1;
+            }
+            if (nameA > nameB) {
+                return -1;
+            }
+            return 0;
+        });
+    } else if (sortBy === 3) {
+        todos.sort((a, b) => b.completed - a.completed);
+    } else if (sortBy === 4) {
+        todos.sort((a, b) => a.completed - b.completed);
+    } else if (sortBy === 5) {
+        todos.sort((a, b) => a.priority - b.priority);
+    } else if (sortBy === 6) {
+        todos.sort((a, b) => b.priority - a.priority);
+    }
+
     const todosArr = todos.map((todo) => {
         return (
             <TodoItem
-                className={'asdasdasdasdasd'}
                 key={todo.id}
                 task={todo}
                 handleChange={handleChange}
@@ -96,31 +133,36 @@ function App() {
             />
         );
     });
-
     // You don't know JS (https://github.com/getify/You-Dont-Know-JS)
 
     return (
         <div className='todos-container'>
             <div className='todos-header'>
-                {/* {showPopup ? <Popup togglePopup={togglePopup} /> : null} */}
                 {showPopup && <PopupNewTodo addNewTodo={addNewTodo} onClose={closeNewPopup} />}
                 {!isEmptyObject(editingCurrent) && (
                     <PopupEditTodo onClose={closeEditPopup} editTask={editTask} passedTodo={editingCurrent} />
                 )}
                 <h2>TODO App</h2>
+
                 <button className='btn-add' onClick={togglePopup}>
                     <i className='fa fa-plus'></i>
                 </button>
             </div>
-            {/* <div className='order-header'>
-                <button>
-                    <i className='fa fa-square'></i>
-                </button>
-                <button>
-                    SZÖVEG <i className='fa fa-arrow-down'></i>
-                </button>
-            </div> */}
             <div className='todos-list'>{todosArr}</div>
+            <div className='todos-bottom'>
+                <select
+                    className='sort-select'
+                    value={sortBy}
+                    onChange={(event) => setSortBy(parseInt(event.target.value))}>
+                    <option value={0}>Alap rendezés</option>
+                    <option value={1}>Szöveg szerint növ.</option>
+                    <option value={2}>Szöveg szerint csökk.</option>
+                    <option value={3}>Elvégzettség szerint növ.</option>
+                    <option value={4}>Elvégzettség szerint csökk.</option>
+                    <option value={5}>Fontosság szerint növ.</option>
+                    <option value={6}>Fontosság szerint csökk.</option>
+                </select>
+            </div>
         </div>
     );
 }
